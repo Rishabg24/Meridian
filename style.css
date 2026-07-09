@@ -1,0 +1,590 @@
+/* ==========================================================================
+   MERIDIAN — Research Consultancy Showcase
+   ========================================================================== */
+
+:root{
+  --linen:        #F5F4F0;
+  --obsidian:     #0B0B0B;
+  --obsidian-70:  rgba(11,11,11,.7);
+  --obsidian-45:  rgba(11,11,11,.45);
+  --obsidian-18:  rgba(11,11,11,.18);
+  --obsidian-08:  rgba(11,11,11,.08);
+  --cobalt:       #0047AB;
+  --coral:        #FF7F50;
+
+  --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --mono:  "JetBrains Mono", "SF Mono", Menlo, monospace;
+
+  --edge: clamp(1.5rem, 5vw, 5rem);
+  --card-bg: rgba(245,244,240,.66);
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+
+html{
+  /* NOTE: do NOT set `scroll-behavior: smooth` here — it corrupts
+     GSAP ScrollTrigger.refresh() (measurement scrolls land mid-animation,
+     yielding negative start/end and stuck scrubs). Smooth scrolling for
+     nav anchors is handled in JS via scrollIntoView({behavior:'smooth'}). */
+  background: var(--linen);
+}
+
+body{
+  margin: 0;
+  background: var(--linen);
+  color: var(--obsidian);
+  font-family: var(--mono);
+  overflow-x: hidden;
+  cursor: default;
+}
+
+::selection{
+  background: var(--cobalt);
+  color: var(--linen);
+}
+
+h1, h2, h3, h4, .thesis-line, .manifesto__text{
+  font-family: var(--serif);
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+p{ margin: 0; }
+
+a{ color: inherit; text-decoration: none; }
+
+/* ---- background layers -------------------------------------------------- */
+
+#fluid-canvas{
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: var(--linen);
+}
+
+.grain-overlay{
+  position: fixed;
+  inset: -10%;
+  width: 120%;
+  height: 120%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: .045;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size: 180px 180px;
+}
+
+.vignette{
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  box-shadow: inset 0 0 22vw rgba(11,11,11,.10);
+}
+
+main{
+  position: relative;
+  z-index: 2;
+}
+
+/* ---- nav ------------------------------------------------------------ */
+
+.nexus-nav{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.6rem var(--edge);
+  pointer-events: none;
+  mix-blend-mode: difference;
+  transition: padding .5s cubic-bezier(.16,1,.3,1),
+              background .5s ease,
+              box-shadow .5s ease,
+              backdrop-filter .5s ease;
+}
+.nexus-nav *{ pointer-events: auto; }
+
+/* Past the opening viewport: swap the difference-blend for a solid dark,
+   embolden the labels, and float a translucent linen bar for legibility. */
+.nexus-nav.is-scrolled{
+  mix-blend-mode: normal;
+  padding-top: 1.15rem;
+  padding-bottom: 1.15rem;
+  background: rgba(245, 244, 240, .82);
+  backdrop-filter: blur(14px) saturate(1.05);
+  -webkit-backdrop-filter: blur(14px) saturate(1.05);
+  box-shadow: 0 1px 0 var(--obsidian-08), 0 .7rem 2rem -1.4rem var(--obsidian-18);
+}
+
+.nexus-nav__mark{
+  font-family: var(--mono);
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .28em;
+  color: var(--linen);
+  transition: color .5s ease, font-weight .5s ease;
+}
+.nexus-nav.is-scrolled .nexus-nav__mark{
+  color: var(--obsidian);
+  font-weight: 700;
+}
+
+.nexus-nav__links{
+  display: flex;
+  gap: 2rem;
+}
+.nexus-nav__links a{
+  font-size: .72rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--linen);
+  position: relative;
+  padding-bottom: 2px;
+  transition: color .5s ease, font-weight .5s ease;
+}
+.nexus-nav.is-scrolled .nexus-nav__links a{
+  color: var(--obsidian);
+  font-weight: 600;
+}
+.nexus-nav__links a::after{
+  content: "";
+  position: absolute;
+  left: 0; right: 100%;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transition: right .45s cubic-bezier(.16,1,.3,1);
+}
+.nexus-nav__links a:hover::after{ right: 0; }
+
+/* ---- shared scene scaffolding ----------------------------------------- */
+
+.scene{
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  padding: 0 var(--edge);
+}
+
+.scene-label{
+  display: inline-block;
+  font-size: .72rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--obsidian-45);
+}
+
+.eyebrow{
+  display: block;
+  font-size: .7rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--cobalt);
+  margin-bottom: 1.1rem;
+}
+
+.obstacle{
+  position: relative;
+  background: var(--card-bg);
+  backdrop-filter: blur(18px) saturate(1.05);
+  -webkit-backdrop-filter: blur(18px) saturate(1.05);
+  border: 1px solid var(--obsidian-08);
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   SCENE 1 — THE MONOLITH
+   ========================================================================== */
+
+.scene--monolith{
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr minmax(auto, 25rem);
+  align-items: center;
+  gap: 2vw;
+  padding-top: 8rem;
+  padding-bottom: 6rem;
+}
+
+.monolith__thesis{
+  padding: 3rem clamp(1.5rem, 4vw, 3.5rem);
+  max-width: 42rem;
+  text-align: center;
+  justify-self: center;
+}
+
+.thesis-line{
+  font-size: clamp(1.7rem, 4.4vw, 3.1rem);
+  line-height: 1.28;
+  color: var(--obsidian);
+  will-change: transform, opacity, filter;
+}
+
+.thesis-line--em{
+  color: var(--cobalt);
+  font-style: italic;
+}
+
+.monolith__profile{
+  position: relative;
+  justify-self: end;
+  align-self: end;
+  margin-bottom: 8vh;
+  max-width: 23rem;
+  padding: 2.2rem 2.4rem;
+  will-change: transform, opacity;
+}
+
+.monolith_what_we_do{
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: min(100%, 44rem);
+  margin-top: 1rem;
+  padding: clamp(1.8rem, 3vw, 2.6rem);
+  background: rgba(255,255,255,.96);
+  box-shadow: 0 1rem 2.4rem -1.4rem rgba(11,11,11,.16);
+  border: 1px solid rgba(11,11,11,.08);
+}
+
+.monolith__title{
+  font-size: clamp(1rem, 1.7vw, 1.2rem);
+  line-height: 1.75;
+  color: var(--obsidian-70);
+  max-width: 38rem;
+}
+
+.profile__name{
+  font-size: 1.5rem;
+  margin-bottom: 1.1rem;
+}
+
+.profile__body{
+  font-size: .82rem;
+  line-height: 1.7;
+  color: var(--obsidian-70);
+  margin-bottom: .9rem;
+}
+.profile__body--fine{
+  color: var(--obsidian-45);
+  font-size: .76rem;
+}
+
+.global-tag{
+  position: fixed;
+  left: clamp(1rem, 2vw, 1.4rem);
+  bottom: .9rem;
+  z-index: 40;
+  font-size: calc(.72rem * 0.92);
+  letter-spacing: .1em;
+  color: var(--obsidian-45);
+  pointer-events: none;
+  padding: calc(.5rem * 0.92) calc(.8rem * 0.92);
+  background: rgba(245, 244, 240, .78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 2px;
+}
+
+.scroll-cue{
+  position: absolute;
+  left: var(--edge);
+  bottom: 3.4rem;
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  font-size: .68rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--obsidian-45);
+}
+.scroll-cue__line{
+  width: 1px;
+  height: 34px;
+  background: var(--obsidian-18);
+  position: relative;
+  overflow: hidden;
+}
+.scroll-cue__line::after{
+  content: "";
+  position: absolute;
+  left: 0; top: -100%;
+  width: 100%; height: 100%;
+  background: var(--cobalt);
+  animation: cue-drip 2.2s ease-in-out infinite;
+}
+@keyframes cue-drip{
+  0%{ top: -100%; }
+  60%{ top: 100%; }
+  100%{ top: 100%; }
+}
+
+/* ==========================================================================
+   SCENE 2 — THE CONSTELLATION
+   ========================================================================== */
+
+.scene--constellation{
+  min-height: 130vh;
+  padding-top: 7rem;
+  padding-bottom: 8rem;
+}
+
+.scene--constellation > .scene-label{
+  display: block;
+  margin-bottom: 3rem;
+}
+
+.constellation{
+  display: flex;
+  flex-direction: column;
+  gap: 6vh;
+}
+
+.service{
+  padding: 2rem clamp(1.4rem, 3.4vw, 2.6rem);
+  max-width: 38rem;
+  transition: border-color .5s ease, box-shadow .5s ease;
+}
+
+.service:nth-child(1){ align-self: flex-start; margin-left: 2vw; }
+.service:nth-child(2){ align-self: center; }
+.service:nth-child(3){ align-self: flex-end; margin-right: 4vw; }
+.service:nth-child(4){ align-self: center; margin-left: 8vw; }
+
+.service.is-active{
+  border-color: var(--obsidian-18);
+  box-shadow: 0 1.5rem 3.5rem -1.6rem var(--obsidian-18);
+}
+
+.service__index{
+  display: block;
+  font-size: .7rem;
+  letter-spacing: .16em;
+  color: var(--obsidian-45);
+  margin-bottom: .6rem;
+}
+
+.service__title{
+  font-size: clamp(1.15rem, 2.3vw, 1.6rem);
+  line-height: 1.35;
+  max-width: 24rem;
+}
+
+.service__toggle{
+  margin-top: 1.3rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  background: none;
+  border: none;
+  font-family: var(--mono);
+  font-size: .7rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--obsidian-70);
+  cursor: pointer;
+  padding: 0;
+}
+.service__toggle-glyph{
+  display: inline-block;
+  transition: transform .45s cubic-bezier(.16,1,.3,1);
+  font-size: .95rem;
+}
+.service__toggle[aria-expanded="true"] .service__toggle-glyph{
+  transform: rotate(135deg);
+}
+
+.service__drawer{
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+.service__drawer p{
+  padding-top: 1.2rem;
+  font-size: .82rem;
+  line-height: 1.75;
+  color: var(--obsidian-70);
+  border-top: 1px solid var(--obsidian-08);
+  margin-top: 1.2rem;
+}
+
+/* ==========================================================================
+   SCENE 3 — THE ARCHIVE
+   ========================================================================== */
+
+.scene--archive{
+  min-height: 160vh;
+  padding-top: 7rem;
+  padding-bottom: 10rem;
+}
+
+.timeline{
+  position: relative;
+  padding-left: 1.6rem;
+  margin-bottom: 12vh;
+}
+
+.timeline__track{
+  position: absolute;
+  left: 0; top: .5rem; bottom: .5rem;
+  width: 1px;
+  background: linear-gradient(var(--obsidian-18), var(--obsidian-08));
+}
+
+.timeline__node{
+  position: relative;
+  max-width: 30rem;
+  padding: 1.6rem 1.9rem;
+  margin: 0 0 3.2rem 2rem;
+  will-change: transform;
+}
+.timeline__node:last-child{ margin-bottom: 0; }
+
+.node__marker{
+  position: absolute;
+  left: -2.55rem;
+  top: 1.9rem;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--cobalt);
+  box-shadow: 0 0 0 4px var(--linen), 0 0 0 5px var(--obsidian-08);
+}
+.timeline__node:nth-child(3n) .node__marker{ background: var(--coral); }
+
+.node__plaque-label{
+  display: block;
+  font-size: .64rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--obsidian-45);
+  margin-bottom: .6rem;
+}
+
+.timeline__node h4{
+  font-size: 1.05rem;
+  line-height: 1.4;
+  margin-bottom: .55rem;
+}
+
+.timeline__node p{
+  font-size: .78rem;
+  line-height: 1.6;
+  color: var(--obsidian-70);
+}
+
+.manifesto{
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 5vw, 4rem);
+  text-align: left;
+}
+.manifesto .scene-label{ margin-bottom: 1.6rem; }
+
+.manifesto__text{
+  font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+  line-height: 1.55;
+  color: var(--obsidian);
+}
+
+/* ==========================================================================
+   THE TERMINAL
+   ========================================================================== */
+
+.scene--terminal{
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 6rem;
+  padding-bottom: 3.5rem;
+  gap: 2.4rem;
+}
+
+.terminal{
+  width: min(100%, 46rem);
+  padding: clamp(2rem, 4vw, 3rem);
+}
+
+.terminal .scene-label{ display: block; margin-bottom: 2rem; }
+
+.terminal__grid{
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal__row{
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: 1.5rem;
+  padding: 1.05rem 0;
+  border-top: 1px solid var(--obsidian-08);
+}
+.terminal__row:first-child{ border-top: none; }
+
+.terminal__label{
+  font-size: .7rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--obsidian-45);
+}
+
+.terminal__value{
+  font-size: .92rem;
+  color: var(--obsidian);
+  line-height: 1.5;
+}
+.terminal__row--note .terminal__value{
+  color: var(--cobalt);
+}
+
+.terminal__mark{
+  font-size: .68rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--obsidian-45);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 900px){
+  .monolith__profile{
+    position: static;
+    margin: 3rem auto 0;
+    max-width: 30rem;
+  }
+  .scene--monolith{
+    padding-top: 7rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .service:nth-child(1),
+  .service:nth-child(2),
+  .service:nth-child(3),
+  .service:nth-child(4){
+    align-self: center;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .nexus-nav__links{ gap: 1.2rem; }
+}
+
+@media (max-width: 560px){
+  :root{ --edge: 1.15rem; }
+  .terminal__row{ grid-template-columns: 1fr; gap: .3rem; }
+  .nexus-nav__links{ display: none; }
+  .thesis-line{ font-size: 1.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .scroll-cue__line::after{ animation: none; }
+}
