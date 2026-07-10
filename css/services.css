@@ -78,7 +78,7 @@
 
 .stage__visual{
   position: relative;
-  height: min(66vh, 640px);
+  height: min(64vh, 600px);
   padding: clamp(1rem, 2vw, 1.6rem);
 }
 

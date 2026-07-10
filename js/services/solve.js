@@ -35,7 +35,7 @@ export function create(canvas, { weights }) {
 
     inputs = INPUTS.map((label, i) => ({
       label,
-      x: s.w * 0.16,
+      x: s.w * 0.18,
       y: padY + (usable * (i + 0.5)) / INPUTS.length,
     }));
 
@@ -175,7 +175,7 @@ export function create(canvas, { weights }) {
     ctx.textAlign = "left";
     ctx.font = '400 11px "JetBrains Mono", monospace';
     ctx.fillStyle = INK.muted;
-    ctx.fillText(`evidence reaching decision  ${Math.round(total * 100)}%`, 0, s.h - 6);
+    ctx.fillText(`evidence reaching decision  ${Math.round(total * 100)}%`, 8, s.h - 6);
     ctx.globalAlpha = 1;
   };
 

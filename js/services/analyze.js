@@ -15,7 +15,7 @@ const PAD = { l: 44, r: 12, t: 16, b: 46 };
 
 /** Exposure axis, µg/m³ of PM2.5. Response axis, log relative risk. */
 const X_DOMAIN = [0, 120];
-const Y_DOMAIN = [0, 0.34];
+const Y_DOMAIN = [0, 0.4];
 
 const BETA0 = 0.012;
 const BETA1 = 0.00205;
@@ -73,7 +73,7 @@ export function create(canvas) {
 
     ctx.textAlign = "right";
     ctx.textBaseline = "middle";
-    for (let v = 0; v <= 0.3; v += 0.1) {
+    for (let v = 0; v <= 0.4; v += 0.1) {
       ctx.fillText(v.toFixed(1), plot.x - 8, sy(v));
     }
 
