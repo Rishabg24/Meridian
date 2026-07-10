@@ -3,221 +3,201 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Meridian — Dr. Rakesh Ghosh, Public Health Research Consultancy</title>
-<meta name="description" content="Meridian is the solo public health research practice of Dr. Rakesh Ghosh, PhD — study design, data collection, analysis, and feasible solutions across global settings.">
+<title>Meridian — Dr. Rakesh Ghosh, PhD · Public Health Research Consultancy</title>
+<meta name="description" content="Meridian is the public health research practice of Dr. Rakesh Ghosh, PhD — epidemiologist. Study design, data collection, analysis, and feasible solutions across global settings.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/transitions.css">
+<link rel="stylesheet" href="css/home.css">
 </head>
-<body>
+<body data-page="home">
 
-<canvas id="fluid-canvas"></canvas>
-<div class="grain-overlay" aria-hidden="true"></div>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<canvas id="fluid-canvas" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
 <div class="vignette" aria-hidden="true"></div>
+<div class="wipe" aria-hidden="true"><span class="wipe__line"></span></div>
 
-<nav class="nexus-nav">
-  <a href="#home" class="nexus-nav__mark">MERIDIAN</a>
-  <div class="nexus-nav__links">
-    <a href="#services">services</a>
-    <a href="#archive">experience</a>
-    <a href="#contact">contact</a>
+<nav class="nav" aria-label="Primary">
+  <a class="nav__mark" href="index.html">
+    <span class="nav__mark-rule" aria-hidden="true"></span>MERIDIAN
+  </a>
+
+  <div class="nav__links">
+    <a class="nav__link" href="services.html" data-page="services">Services</a>
+    <a class="nav__link" href="experience.html" data-page="experience">Experience</a>
+    <a class="nav__link" href="contact.html" data-page="contact">Contact</a>
+    <span class="nav__dot" aria-hidden="true"></span>
   </div>
+
+  <button class="nav__burger" type="button" aria-expanded="false" aria-controls="nav-sheet" aria-label="Open menu">
+    <span class="nav__burger-bars" aria-hidden="true"></span>
+  </button>
 </nav>
 
-<main>
+<div class="nav-sheet" id="nav-sheet" aria-hidden="true">
+  <a class="nav-sheet__link" style="--i:0" href="index.html" data-page="home">Home</a>
+  <a class="nav-sheet__link" style="--i:1" href="services.html" data-page="services">Services</a>
+  <a class="nav-sheet__link" style="--i:2" href="experience.html" data-page="experience">Experience</a>
+  <a class="nav-sheet__link" style="--i:3" href="contact.html" data-page="contact">Contact</a>
+  <p class="nav-sheet__meta">Rakesh.ghosh@gmail.com</p>
+</div>
 
-  <!-- SCENE 1 — THE MONOLITH -->
-  <section id="home" class="scene scene--monolith">
+<main id="main">
 
-    <div class="monolith__thesis obstacle" data-obstacle="cobalt">
-      <p class="thesis-line">True research is not just</p>
-      <p class="thesis-line">the collection of data,</p>
-      <p class="thesis-line thesis-line--em">but the pursuit of the</p>
-      <p class="thesis-line thesis-line--em">silence between the numbers.</p>
-    </div>
+  <!-- 1 — Overture -->
+  <section class="scene overture">
+    <span class="overture__note margin-note">[ Public health research practice ]</span>
 
-    <div class="monolith__profile obstacle" data-obstacle="coral">
-      <span class="eyebrow">[ The consultant ]</span>
-      <h1 class="profile__name">Dr. Rakesh Ghosh, PhD</h1>
-      <p class="profile__body">
-        Meridian is the research practice of Dr.&nbsp;Rakesh Ghosh — built on
-        two decades directing public health research across the United Kingdom,
-        Europe, the United States, South Asia, Sub-Saharan Africa, and Latin America.
-        PhD, United Kingdom. Post-doctoral research, University of California, Davis.
+    <h1 class="overture__thesis">
+      <span data-line>True research is not just</span>
+      <span data-line>the collection of data,</span>
+      <span data-line class="is-em">but the pursuit of the</span>
+      <span data-line class="is-em" data-hold="silence">silence between the numbers.</span>
+    </h1>
+
+    <hr class="rule overture__rule">
+
+    <div class="overture__foot">
+      <span class="scroll-cue">
+        <span class="scroll-cue__rail" aria-hidden="true"></span>scroll
+      </span>
+      <p class="overture__attrib">
+        The research practice of Dr.&nbsp;Rakesh Ghosh, PhD.
+        Epidemiology of maternal, neonatal and environmental health.
       </p>
-      <p class="profile__body profile__body--fine">
-        Principal Investigator on national and international studies.
-        Committee service, National Academies of Sciences, Engineering, and Medicine.
+    </div>
+  </section>
+
+  <!-- 2 — Mission -->
+  <section class="scene mission">
+    <span class="mission__note margin-note">[ What we do ]</span>
+
+    <div class="mission__panel panel panel--solid" data-obstacle="cobalt">
+      <p class="mission__text">
+        Our Mission is to aid institutions and organizations in changing the world
+        for the better. If you need to complete a research survey, analyze air
+        pollution trends, or provide a report on the health of a population, we can help.
       </p>
     </div>
-
-    <div class="monolith_what_we_do obstacle" data-obstacle="cobalt">
-      <span class="eyebrow">[ What we do ]</span>
-      <p class="monolith__title">Our Mission is to aid institutions and organizations in changing the world for the better. If you need to complete a research survey, analyze air pollution trends, or provide a report on the health of a population, we can help.</p>
-    </div>
-
-    <span class="global-tag">[ complimentary initial consultation ]</span>
-    <span class="scroll-cue"><span class="scroll-cue__line"></span>scroll</span>
-
   </section>
 
-  <!-- SCENE 2 — THE CONSTELLATION -->
-  <section id="services" class="scene scene--constellation">
+  <!-- 3 — The consultant -->
+  <section class="scene consultant">
+    <div class="consultant__aside">
+      <div class="consultant__sticky">
+        <span class="margin-note">[ The consultant ]</span>
+        <h2 class="consultant__name">Dr. Rakesh Ghosh, PhD</h2>
+        <p class="consultant__role">Epidemiologist · Principal Investigator</p>
+      </div>
+    </div>
 
-    <span class="scene-label">[ Services ]</span>
+    <div class="consultant__body">
+      <p class="lede">
+        An epidemiologist specializing in maternal and neonatal health, environmental
+        impacts, and quality improvement interventions, driven by a passion to advance
+        science through rigorous research, impactful teaching, and purposeful collaboration.
+      </p>
 
-    <div class="constellation" data-track>
+      <p class="prose">
+        The work integrates methodological rigor with advanced analytical expertise,
+        producing a record of publications in high-impact journals, several of which have
+        drawn international media coverage. An international background spanning India,
+        the United Kingdom, and the United States has strengthened the ability to
+        collaborate across cultures and disciplines, fostering inclusive learning
+        environments and equitable research partnerships.
+      </p>
 
-      <article class="service obstacle" data-index="0" data-obstacle="cobalt">
-        <span class="service__index">01</span>
-        <h3 class="service__title">Design studies</h3>
-        <button class="service__toggle" aria-expanded="false" data-toggle>
-          <span class="service__toggle-label">expand</span>
-          <span class="service__toggle-glyph">＋</span>
-        </button>
-        <div class="service__drawer">
-          <p>Study architecture, sampling frameworks, and mixed-methods protocols
-          scoped for feasibility — from IRB submission to field-ready instruments.</p>
-        </div>
-      </article>
+      <p class="prose prose--fine">
+        Two decades directing public health research across the United Kingdom, Europe,
+        the United States, South Asia, Sub-Saharan Africa, and Latin America. Principal
+        Investigator on national and international studies.
+      </p>
 
-      <article class="service obstacle" data-index="1" data-obstacle="coral">
-        <span class="service__index">02</span>
-        <h3 class="service__title">Collect data to support research</h3>
-        <button class="service__toggle" aria-expanded="false" data-toggle>
-          <span class="service__toggle-label">expand</span>
-          <span class="service__toggle-glyph">＋</span>
-        </button>
-        <div class="service__drawer">
-          <p>Field data collection across clinical, household, and policy settings —
-          survey instruments, biomarkers, and qualitative fieldwork, executed to the
-          standard of publication.</p>
-        </div>
-      </article>
-
-      <article class="service obstacle" data-index="2" data-obstacle="cobalt">
-        <span class="service__index">03</span>
-        <h3 class="service__title">Analyze and produce reports</h3>
-        <button class="service__toggle" aria-expanded="false" data-toggle>
-          <span class="service__toggle-label">expand</span>
-          <span class="service__toggle-glyph">＋</span>
-        </button>
-        <div class="service__drawer">
-          <p>Statistical and epidemiological analysis translated into
-          peer-review-ready manuscripts, technical reports, and policy briefs.</p>
-        </div>
-      </article>
-
-      <article class="service obstacle" data-index="3" data-obstacle="coral">
-        <span class="service__index">04</span>
-        <h3 class="service__title">Recommend feasible solutions for identified problems</h3>
-        <button class="service__toggle" aria-expanded="false" data-toggle>
-          <span class="service__toggle-label">expand</span>
-          <span class="service__toggle-glyph">＋</span>
-        </button>
-        <div class="service__drawer">
-          <p>Findings converted into interventions that are actually implementable —
-          sized to the budget, capacity, and politics of the setting that requested them.</p>
-        </div>
-      </article>
-
+      <ul class="credentials">
+        <li>
+          <span class="credentials__key">Doctorate</span>
+          <span class="credentials__val">PhD, Epidemiology. Institute of Health and Society, Newcastle University, UK</span>
+        </li>
+        <li>
+          <span class="credentials__key">Post-doctoral</span>
+          <span class="credentials__val">University of California, Davis. 2009–2012</span>
+        </li>
+        <li>
+          <span class="credentials__key">Position</span>
+          <span class="credentials__val">Senior Epidemiologist, University of California, San Francisco. 2016–present</span>
+        </li>
+        <li>
+          <span class="credentials__key">Committee</span>
+          <span class="credentials__val">National Academies of Sciences, Engineering, and Medicine. Scientific Review Committee</span>
+        </li>
+        <li>
+          <span class="credentials__key">Fellowship</span>
+          <span class="credentials__val">Fellow of the Faculty of Public Health, Royal College of Physicians, UK</span>
+        </li>
+      </ul>
     </div>
   </section>
 
-  <!-- SCENE 3 — THE ARCHIVE & NEXUS -->
-  <section id="archive" class="scene scene--archive">
-
-    <span class="scene-label">[ Expereince]</span>
-
-    <div class="timeline" data-timeline>
-      <div class="timeline__track" aria-hidden="true"></div>
-
-      <div class="timeline__node obstacle" data-obstacle="cobalt">
-        <span class="node__marker"></span>
-        <span class="node__plaque-label">experience</span>
-        <h4>PhD — United Kingdom</h4>
-        <p>Doctoral research in public health.</p>
-      </div>
-
-      <div class="timeline__node obstacle" data-obstacle="coral">
-        <span class="node__marker"></span>
-        <span class="node__plaque-label">experience</span>
-        <h4>Post-doctoral research — UC Davis</h4>
-        <p>Extended training in applied public health research methods.</p>
-      </div>
-
-      <div class="timeline__node obstacle" data-obstacle="cobalt">
-        <span class="node__marker"></span>
-        <span class="node__plaque-label">experience</span>
-        <h4>Principal Investigator</h4>
-        <p>Directed national and international studies across the UK, Europe,
-        USA, South Asia, Sub-Saharan Africa, and Latin America.</p>
-      </div>
-
-      <div class="timeline__node obstacle" data-obstacle="coral">
-        <span class="node__marker"></span>
-        <span class="node__plaque-label">accolade</span>
-        <h4>National Academies of Sciences, Engineering, and Medicine</h4>
-        <p>Committee service contributing to national research policy.</p>
-      </div>
-
-      <div class="timeline__node obstacle" data-obstacle="cobalt">
-        <span class="node__marker"></span>
-        <span class="node__plaque-label">accolade</span>
-        <h4>Published record</h4>
-        <p>High-impact journal publications and authored book chapters
-        spanning two decades of practice.</p>
-      </div>
+  <!-- 4 — The creed -->
+  <section class="scene creed">
+    <div class="creed__panel panel" data-obstacle="coral">
+      <span class="margin-note">[ Reason for doing so ]</span>
+      <p class="creed__text">
+        Numbers alone convince no one, and they save no one. Every dataset sits on top of
+        a question someone was afraid to ask aloud — <em>who gets counted, who gets
+        treated, who gets left outside the sampling frame.</em> The work is not finished
+        when the p-value is. It is finished when a ministry changes a policy, a clinic
+        changes a protocol, or a community receives the resource the data said it needed.
+      </p>
     </div>
-
-    <div class="manifesto obstacle" data-obstacle="coral">
-      <span class="scene-label">[ reason for doing so ]</span>
-      <p class="manifesto__text">Numbers alone convince no one, and they save no
-      one. Every dataset sits on top of a question someone was afraid to ask
-      aloud — who gets counted, who gets treated, who gets left outside the
-      sampling frame. The work is not finished when the p-value is. It is
-      finished when a ministry changes a policy, a clinic changes a protocol,
-      or a community receives the resource the data said it needed.</p>
-    </div>
-
   </section>
 
-  <!-- THE TERMINAL -->
-  <footer id="contact" class="scene scene--terminal">
+  <!-- 5 — The consequence -->
+  <section class="scene consequence">
+    <span class="margin-note">[ What it changed ]</span>
 
-    <div class="terminal obstacle" data-obstacle="cobalt">
-      <span class="scene-label">[ Contact ]</span>
+    <p class="consequence__text">
+      In 2019, reducing ambient and household PM<sub>2.5</sub> exposure during pregnancy
+      to a minimum risk level could have prevented almost
+      <span class="figure" data-count="2.8">2.8</span> million low-birth-weight and
+      <span class="figure" data-count="5.9">5.9</span> million preterm births across
+      <span class="figure" data-count="204">204</span> countries and territories.
+    </p>
 
-      <div class="terminal__grid">
-        <div class="terminal__row">
-          <span class="terminal__label">practice</span>
-          <span class="terminal__value">Meridian — Public Health Research Services</span>
-        </div>
-        <div class="terminal__row">
-          <span class="terminal__label">principal</span>
-          <span class="terminal__value">Dr. Rakesh Ghosh, PhD</span>
-        </div>
-        <div class="terminal__row">
-          <span class="terminal__label">inquiries</span>
-          <span class="terminal__value">Rakesh.ghosh@gmail.com</span>
-        </div>
-        <div class="terminal__row terminal__row--note">
-          <span class="terminal__label">note</span>
-          <span class="terminal__value">first consultation, complimentary.</span>
-        </div>
-      </div>
-    </div>
+    <p class="consequence__source">
+      Ghosh R, Causey K, Burkart K, Wozniak S, Cohen A, Brauer M.
+      <a href="https://pubmed.ncbi.nlm.nih.gov/34547030/" target="_blank" rel="noopener">
+        Ambient and household PM<sub>2.5</sub> pollution and adverse perinatal outcomes</a>.
+      PLoS Medicine, 2021.
+    </p>
+  </section>
 
-    <span class="terminal__mark">MERIDIAN — EST. RESEARCH PRACTICE</span>
+  <!-- 6 — Handoff -->
+  <section class="scene handoff">
+    <a class="handoff__link" href="services.html">
+      How the work is done
+      <span class="handoff__arrow" aria-hidden="true">⟶</span>
+    </a>
+    <hr class="rule handoff__rule">
+  </section>
+
+  <footer class="site-foot">
+    <span>Meridian — Est. Research Practice</span>
+    <a href="mailto:Rakesh.ghosh@gmail.com">Rakesh.ghosh@gmail.com</a>
   </footer>
 
 </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="script.js"></script>
+<script type="module" src="js/main.js"></script>
 </body>
 </html>

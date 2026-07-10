@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Meridian</title>
+<meta name="description" content="Begin a conversation with Dr. Rakesh Ghosh, PhD. The first consultation is complimentary.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/transitions.css">
+<link rel="stylesheet" href="css/contact.css">
+</head>
+<body data-page="contact">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<canvas id="fluid-canvas" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+<div class="wipe" aria-hidden="true"><span class="wipe__line"></span></div>
+
+<nav class="nav" aria-label="Primary">
+  <a class="nav__mark" href="index.html">
+    <span class="nav__mark-rule" aria-hidden="true"></span>MERIDIAN
+  </a>
+
+  <div class="nav__links">
+    <a class="nav__link" href="services.html" data-page="services">Services</a>
+    <a class="nav__link" href="experience.html" data-page="experience">Experience</a>
+    <a class="nav__link" href="contact.html" data-page="contact">Contact</a>
+    <span class="nav__dot" aria-hidden="true"></span>
+  </div>
+
+  <button class="nav__burger" type="button" aria-expanded="false" aria-controls="nav-sheet" aria-label="Open menu">
+    <span class="nav__burger-bars" aria-hidden="true"></span>
+  </button>
+</nav>
+
+<div class="nav-sheet" id="nav-sheet" aria-hidden="true">
+  <a class="nav-sheet__link" style="--i:0" href="index.html" data-page="home">Home</a>
+  <a class="nav-sheet__link" style="--i:1" href="services.html" data-page="services">Services</a>
+  <a class="nav-sheet__link" style="--i:2" href="experience.html" data-page="experience">Experience</a>
+  <a class="nav-sheet__link" style="--i:3" href="contact.html" data-page="contact">Contact</a>
+  <p class="nav-sheet__meta">Rakesh.ghosh@gmail.com</p>
+</div>
+
+<main id="main">
+
+  <section class="scene contact">
+
+    <!-- 1 — the information terminal -->
+    <div class="terminal panel" data-obstacle="cobalt">
+      <span class="terminal__label margin-note">[ Contact ]</span>
+
+      <div class="terminal__grid">
+        <div class="terminal__row">
+          <span class="terminal__key">practice</span>
+          <span class="terminal__val">Meridian — Public Health Research Services</span>
+        </div>
+        <div class="terminal__row">
+          <span class="terminal__key">principal</span>
+          <span class="terminal__val">Dr. Rakesh Ghosh, PhD</span>
+        </div>
+        <div class="terminal__row">
+          <span class="terminal__key">inquiries</span>
+          <span class="terminal__val">
+            <a href="mailto:Rakesh.ghosh@gmail.com">Rakesh.ghosh@gmail.com</a>
+          </span>
+        </div>
+        <div class="terminal__row terminal__row--note">
+          <span class="terminal__key">note</span>
+          <span class="terminal__val">first consultation, complimentary.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 — the inquiry -->
+    <form class="inquiry panel" data-obstacle="coral" novalidate>
+      <span class="inquiry__label margin-note">[ Send an inquiry ]</span>
+      <h1 class="inquiry__title">Tell me about the work.</h1>
+
+      <div class="field">
+        <label class="field__label" for="f-name">Full name</label>
+        <input class="field__input" id="f-name" name="name" type="text"
+               autocomplete="name" required
+               aria-describedby="e-name">
+        <span class="field__rule" aria-hidden="true"></span>
+        <span class="field__error" id="e-name" role="alert"></span>
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="f-subject">Subject</label>
+        <input class="field__input" id="f-subject" name="subject" type="text"
+               required aria-describedby="e-subject">
+        <span class="field__rule" aria-hidden="true"></span>
+        <span class="field__error" id="e-subject" role="alert"></span>
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="f-message">Message</label>
+        <textarea class="field__input" id="f-message" name="message" rows="5"
+                  required aria-describedby="e-message"></textarea>
+        <span class="field__rule" aria-hidden="true"></span>
+        <span class="field__error" id="e-message" role="alert"></span>
+      </div>
+
+      <div class="inquiry__foot">
+        <button class="submit" type="submit">
+          <span class="submit__text">Send inquiry</span>
+          <span class="submit__arrow" aria-hidden="true">⟶</span>
+          <span class="submit__rule" aria-hidden="true"></span>
+        </button>
+
+        <p class="status" role="status" aria-live="polite"></p>
+      </div>
+
+      <noscript>
+        <p class="prose prose--fine" style="margin-top:1.5rem">
+          This form needs JavaScript to send.
+          Please write to <a href="mailto:Rakesh.ghosh@gmail.com">Rakesh.ghosh@gmail.com</a> instead.
+        </p>
+      </noscript>
+    </form>
+
+  </section>
+
+  <footer class="site-foot">
+    <span>Meridian — Est. Research Practice</span>
+    <a href="mailto:Rakesh.ghosh@gmail.com">Rakesh.ghosh@gmail.com</a>
+  </footer>
+
+</main>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+/* ==========================================================================
+   MERIDIAN — Services
+   Four sticky stages. Left: the argument. Right: the argument, performed.
+   Each stage's visual is a solid object the fluid must flow around.
+   ========================================================================== */
+
+.services{ padding-bottom: var(--gap-l); }
+
+.stage{
+  position: relative;
+  min-height: 210vh;
+  /* Off-screen stages cost nothing to lay out. */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 210vh;
+}
+.stage:last-of-type{ min-height: 170vh; }
+
+.stage__inner{
+  position: sticky;
+  top: 0;
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+  padding-block: clamp(6rem, 12vh, 8rem) var(--gap-m);
+}
+
+/* ---- the argument ------------------------------------------------------ */
+
+.stage__text{ max-width: 34rem; }
+
+.stage__index{
+  display: block;
+  font-size: var(--t-label);
+  letter-spacing: .2em;
+  color: var(--cobalt);
+  font-variant-numeric: tabular-nums;
+}
+
+.stage__title{
+  margin-top: var(--gap-s);
+  font-size: var(--t-h2);
+  line-height: 1.16;
+  letter-spacing: var(--ls-display);
+  max-width: 14ch;
+}
+
+.stage__body{
+  margin-top: var(--gap-s);
+  font-size: var(--t-body);
+  line-height: var(--lh-body);
+  color: var(--obsidian-70);
+  max-width: 46ch;
+}
+
+/* The six named techniques, surfaced beneath the four pillars they belong to. */
+.caps{
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin: var(--gap-s) 0 0;
+  padding: var(--gap-s) 0 0;
+  list-style: none;
+  border-top: 1px solid var(--obsidian-08);
+}
+.caps li{
+  font-size: var(--t-micro);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--obsidian-62);
+  padding: .38rem .7rem;
+  border: 1px solid var(--obsidian-12);
+  border-radius: var(--radius);
+}
+
+/* ---- the performance --------------------------------------------------- */
+
+.stage__visual{
+  position: relative;
+  height: min(66vh, 640px);
+  padding: clamp(1rem, 2vw, 1.6rem);
+}
+
+.stage__canvas{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---- the constraint weights (stage 04) --------------------------------- */
+
+.weights{
+  margin-top: var(--gap-s);
+  padding-top: var(--gap-s);
+  border-top: 1px solid var(--obsidian-08);
+  display: grid;
+  gap: var(--gap-xs);
+}
+
+.weight{
+  display: grid;
+  grid-template-columns: 7rem 1fr 2.6rem;
+  align-items: center;
+  gap: var(--gap-xs);
+}
+
+.weight__label{
+  font-size: var(--t-micro);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--obsidian-62);
+}
+
+.weight__value{
+  font-size: var(--t-micro);
+  color: var(--cobalt);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* A range input rebuilt from nothing. The track is a hairline, the thumb is
+   the same cobalt dot that travels the nav. */
+.weight__input{
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 18px;
+  background: transparent;
+  cursor: pointer;
+}
+.weight__input::-webkit-slider-runnable-track{
+  height: 1px;
+  background: var(--obsidian-18);
+}
+.weight__input::-moz-range-track{
+  height: 1px;
+  background: var(--obsidian-18);
+}
+.weight__input::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  appearance: none;
+  width: 9px; height: 9px;
+  margin-top: -4px;
+  border-radius: 50%;
+  background: var(--cobalt);
+  border: none;
+  transition: transform var(--dur-fast) var(--ease-out-quart);
+}
+.weight__input::-moz-range-thumb{
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--cobalt);
+  border: none;
+}
+.weight__input:hover::-webkit-slider-thumb{ transform: scale(1.5); }
+.weight__input:focus-visible::-webkit-slider-thumb{ transform: scale(1.5); }
+.weight__input:focus-visible{ outline: 2px solid var(--cobalt); outline-offset: 4px; }
+
+/* ---- responsive -------------------------------------------------------- */
+
+@media (max-width: 1000px){
+  .stage{ min-height: auto; content-visibility: visible; }
+  .stage:last-of-type{ min-height: auto; }
+
+  .stage__inner{
+    position: static;
+    min-height: 0;
+    grid-template-columns: 1fr;
+    padding-block: var(--gap-l);
+  }
+  .stage__visual{
+    height: min(58vh, 440px);
+    order: 2;
+  }
+  .stage__text{ order: 1; max-width: none; }
+}
+
+@media (max-width: 560px){
+  .stage__visual{ height: 340px; }
+  .weight{ grid-template-columns: 5.6rem 1fr 2.4rem; }
+}

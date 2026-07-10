@@ -1,0 +1,280 @@
+/* ==========================================================================
+   MERIDIAN — Contact
+   Two floating panels. The first is the existing information terminal, refined.
+   The second is a form built from nothing: no browser chrome survives.
+   ========================================================================== */
+
+.contact{
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-l);
+  padding-block: clamp(7rem, 15vh, 10rem) var(--gap-l);
+}
+
+/* ---- 1. The terminal --------------------------------------------------- */
+
+.terminal{
+  width: min(100%, 46rem);
+  padding: clamp(2rem, 4vw, 3rem);
+}
+
+.terminal__label{ display: block; margin-bottom: var(--gap-m); }
+
+.terminal__grid{ display: flex; flex-direction: column; }
+
+.terminal__row{
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: var(--gap-s);
+  padding: 1.05rem 0;
+  border-top: 1px solid var(--obsidian-08);
+}
+.terminal__row:first-child{ border-top: none; }
+
+.terminal__key{
+  font-size: var(--t-label);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--obsidian-62);
+}
+
+.terminal__val{
+  font-size: .92rem;
+  color: var(--obsidian);
+  line-height: 1.5;
+}
+.terminal__val a{ border-bottom: 1px solid var(--obsidian-18); }
+.terminal__val a:hover{ color: var(--cobalt); border-color: var(--cobalt); }
+
+.terminal__row--note .terminal__val{ color: var(--cobalt); }
+
+/* ---- 2. The form ------------------------------------------------------- */
+
+.inquiry{
+  width: min(100%, 46rem);
+  padding: clamp(2rem, 4vw, 3rem);
+}
+
+.inquiry__label{ display: block; margin-bottom: var(--gap-xs); }
+
+.inquiry__title{
+  font-size: var(--t-h3);
+  letter-spacing: var(--ls-display);
+  margin-bottom: var(--gap-m);
+}
+
+.field{
+  position: relative;
+  display: block;
+  margin-bottom: var(--gap-m);
+}
+
+.field__label{
+  display: block;
+  font-size: var(--t-micro);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--obsidian-62);
+  margin-bottom: .6rem;
+  transition: color var(--dur-fast) ease;
+}
+.field:focus-within .field__label{ color: var(--cobalt); }
+
+/* No border, no background, no chrome. A baseline and a caret. */
+.field__input{
+  display: block;
+  width: 100%;
+  padding: .4rem 0 .7rem;
+  font-family: var(--serif);
+  font-size: var(--t-h4);
+  line-height: 1.5;
+  color: var(--obsidian);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  caret-color: var(--cobalt);
+}
+.field__input:focus{ outline: none; }
+/* Placeholders here are hints, never labels. They still owe 4.5:1. */
+.field__input::placeholder{ color: var(--obsidian-62); }
+
+textarea.field__input{
+  resize: vertical;
+  min-height: 7.5rem;
+  font-size: var(--t-body);
+  line-height: var(--lh-body);
+}
+
+/* The rule beneath the field. It draws from the left on focus. */
+.field__rule{
+  position: relative;
+  display: block;
+  height: 1px;
+  background: var(--obsidian-18);
+}
+.field__rule::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--cobalt);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--dur-mid) var(--ease-out-expo),
+              background-color var(--dur-fast) ease;
+}
+.field:focus-within .field__rule::after{ transform: scaleX(1); }
+
+.field.is-invalid .field__rule::after{
+  transform: scaleX(1);
+  background: var(--coral-ink);
+}
+.field.is-invalid .field__label{ color: var(--coral-ink); }
+
+.field__error{
+  display: block;
+  min-height: 1.1rem;
+  margin-top: .5rem;
+  font-size: var(--t-micro);
+  letter-spacing: .06em;
+  color: var(--coral-ink);
+  opacity: 0;
+  transition: opacity var(--dur-fast) ease;
+}
+.field.is-invalid .field__error{ opacity: 1; }
+
+/* A short damped oscillation. Three passes, decaying. Not a bounce ease. */
+@keyframes field-shake{
+  0%   { transform: translateX(0); }
+  22%  { transform: translateX(-5px); }
+  44%  { transform: translateX(3px); }
+  66%  { transform: translateX(-1.6px); }
+  100% { transform: translateX(0); }
+}
+.field.is-shaking{ animation: field-shake 240ms var(--ease-out-quart); }
+
+/* ---- submit ------------------------------------------------------------ */
+
+.inquiry__foot{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-s);
+  flex-wrap: wrap;
+  margin-top: var(--gap-s);
+}
+
+.submit{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-xs);
+  padding: 1rem 0 1.1rem;
+  min-width: 13rem;
+  font-size: var(--t-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--obsidian);
+  cursor: pointer;
+  overflow: hidden;
+}
+.submit[disabled]{ cursor: progress; }
+
+.submit__text{ transition: opacity var(--dur-fast) ease; }
+
+.submit__arrow{
+  font-size: .9rem;
+  transform: translateX(0);
+  transition: transform var(--dur-mid) var(--ease-out-expo);
+}
+.submit:hover:not([disabled]) .submit__arrow{ transform: translateX(.5rem); }
+
+/* The button's own baseline becomes its progress bar. */
+.submit__rule{
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: var(--obsidian-18);
+}
+.submit__rule::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--cobalt);
+  transform: scaleX(var(--progress, 0));
+  transform-origin: left center;
+  transition: transform var(--dur-mid) var(--ease-out-quart),
+              background-color var(--dur-fast) ease;
+}
+.submit:hover:not([disabled]) .submit__rule::after{ --progress: 1; }
+
+.inquiry.is-sending .submit__rule::after{ --progress: .85; }
+.inquiry.is-sent .submit__rule::after{ --progress: 1; }
+.inquiry.is-failed .submit__rule::after{ --progress: 1; background: var(--coral-ink); }
+
+.inquiry.is-sending .submit__arrow,
+.inquiry.is-sent .submit__arrow{ opacity: 0; }
+
+/* ---- status ------------------------------------------------------------ */
+
+.status{
+  display: flex;
+  align-items: center;
+  gap: var(--gap-xs);
+  font-size: var(--t-micro);
+  letter-spacing: .08em;
+  color: var(--obsidian-62);
+  max-width: 30ch;
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateY(.4rem);
+  transition: opacity var(--dur-mid) ease, transform var(--dur-mid) var(--ease-out-quart);
+}
+.status.is-shown{ opacity: 1; transform: none; }
+.status--error{ color: var(--coral-ink); }
+.status--ok{ color: var(--cobalt); }
+.status a{ border-bottom: 1px solid currentColor; }
+
+/* The success mark draws itself. */
+.check{
+  flex: none;
+  width: 18px; height: 18px;
+}
+.check path{
+  fill: none;
+  stroke: var(--cobalt);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 26;
+  stroke-dashoffset: 26;
+}
+.inquiry.is-sent .check path{
+  animation: check-draw 520ms var(--ease-out-quart) forwards;
+}
+@keyframes check-draw{ to{ stroke-dashoffset: 0; } }
+
+/* A quiet spinner while in flight: a rotating hairline arc, not a UI-kit ring. */
+.spinner{
+  flex: none;
+  width: 14px; height: 14px;
+  border: 1px solid var(--obsidian-18);
+  border-top-color: var(--cobalt);
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+}
+@keyframes spin{ to{ transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce){
+  .spinner{ animation: none; border-top-color: var(--cobalt); }
+  .inquiry.is-sent .check path{ stroke-dashoffset: 0; animation: none; }
+  .field.is-shaking{ animation: none; }
+}
+
+@media (max-width: 560px){
+  .terminal__row{ grid-template-columns: 1fr; gap: .3rem; }
+  .inquiry__foot{ align-items: flex-start; flex-direction: column; }
+}

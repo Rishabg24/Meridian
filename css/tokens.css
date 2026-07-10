@@ -1,0 +1,112 @@
+/* ==========================================================================
+   MERIDIAN — Design tokens
+   The brand is fixed: linen, obsidian, cobalt, coral. Playfair + JetBrains Mono.
+   Everything below is scale, rhythm and easing built on top of that.
+   ========================================================================== */
+
+:root{
+  /* ---- palette ---- */
+  --linen:        #F5F4F0;
+  --linen-warm:   #EFEDE7;
+  --obsidian:     #0B0B0B;
+  --cobalt:       #0047AB;
+  --cobalt-deep:  #00337A;
+  --coral:        #FF7F50;
+  /* Coral is 2.27:1 on linen — it can never carry text. This is the same hue
+     and saturation darkened until it clears 4.5:1 (4.85:1). Use it for error
+     copy and state indicators; keep --coral for ink, glows and tints. */
+  --coral-ink:    #C73500;
+
+  /* Ink ramp. Contrast against --linen, measured:
+     -82 → 11.2:1   -70 → 7.2:1   -62 → 5.4:1   -45 → 3.1:1
+     -62 is the floor for any text, including small labels.
+     -45 fails 4.5:1 and is reserved for hairlines and dividers. Never text. */
+  --obsidian-82:  rgba(11,11,11,.82);
+  --obsidian-70:  rgba(11,11,11,.70);
+  --obsidian-62:  rgba(11,11,11,.62);
+  --obsidian-45:  rgba(11,11,11,.45);
+  --obsidian-18:  rgba(11,11,11,.18);
+  --obsidian-16:  rgba(11,11,11,.16);
+  --obsidian-12:  rgba(11,11,11,.12);
+  --obsidian-10:  rgba(11,11,11,.10);
+  --obsidian-08:  rgba(11,11,11,.08);
+  --obsidian-04:  rgba(11,11,11,.04);
+
+  --cobalt-12:    rgba(0,71,171,.12);
+  --coral-12:     rgba(255,127,80,.12);
+
+  /* Linen at alpha — for backdrops that let the fluid canvas read through. */
+  --linen-97:     rgba(245,244,240,.97);
+  --linen-82:     rgba(245,244,240,.82);
+  --linen-78:     rgba(245,244,240,.78);
+
+  /* ---- type ---- */
+  --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --mono:  "JetBrains Mono", "SF Mono", Menlo, monospace;
+
+  /* Modular scale, ratio 1.25, fluid. Display ceiling stays under 6rem. */
+  --t-display: clamp(2.6rem, 1.4rem + 5.4vw, 5.4rem);
+  --t-h1:      clamp(2.1rem, 1.3rem + 3.6vw, 3.9rem);
+  --t-h2:      clamp(1.7rem, 1.2rem + 2.3vw, 2.8rem);
+  --t-h3:      clamp(1.3rem, 1.05rem + 1.1vw, 1.8rem);
+  --t-h4:      clamp(1.05rem, .96rem + .4vw, 1.25rem);
+  --t-body:    clamp(.9rem, .86rem + .18vw, 1rem);
+  --t-small:   .82rem;
+  --t-label:   .7rem;
+  --t-micro:   .64rem;
+
+  --lh-display: 1.08;
+  --lh-head:    1.24;
+  --lh-body:    1.72;
+  --ls-display: -0.022em;   /* floor is -0.04em; we stay well inside it */
+  --ls-label:   .18em;
+
+  --measure: 68ch;
+
+  /* ---- space ---- */
+  --edge:  clamp(1.25rem, 5vw, 6rem);
+  --gap-2xs: .5rem;
+  --gap-xs:  .875rem;
+  --gap-s:   1.5rem;
+  --gap-m:   2.5rem;
+  --gap-l:   clamp(3rem, 6vw, 5.5rem);
+  --gap-xl:  clamp(5rem, 11vw, 10rem);
+  --gap-2xl: clamp(8rem, 16vw, 16rem);
+
+  /* ---- surface ---- */
+  --panel:        rgba(245,244,240,.66);
+  --panel-solid:  rgba(252,251,249,.94);
+  --panel-blur:   blur(18px) saturate(1.05);
+  --radius:       2px;
+
+  /* ---- motion ---- */
+  --ease-out-quart: cubic-bezier(.25, 1, .5, 1);
+  --ease-out-quint: cubic-bezier(.22, 1, .36, 1);
+  --ease-out-expo:  cubic-bezier(.16, 1, .3, 1);
+  --ease-in-quart:  cubic-bezier(.5, 0, .75, 0);
+
+  --dur-instant: 120ms;
+  --dur-fast:    220ms;
+  --dur-mid:     380ms;
+  --dur-slow:    620ms;
+  --dur-sweep:   900ms;
+
+  /* ---- layers ---- */
+  --z-canvas:     0;
+  --z-atmosphere: 1;
+  --z-content:    2;
+  --z-nav:        40;
+  --z-overlay:    60;
+  --z-wipe:       80;
+  --z-cursor:     100;
+}
+
+@media (prefers-reduced-motion: reduce){
+  :root{
+    --dur-instant: 1ms;
+    --dur-fast:    1ms;
+    --dur-mid:     1ms;
+    --dur-slow:    1ms;
+    --dur-sweep:   1ms;
+  }
+}

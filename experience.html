@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experience — Meridian</title>
+<meta name="description" content="Two decades of epidemiological research: positions, funding, awards, publications and recognition. Dr. Rakesh Ghosh, PhD.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/transitions.css">
+<link rel="stylesheet" href="css/experience.css">
+</head>
+<body data-page="experience">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<canvas id="fluid-canvas" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+<div class="wipe" aria-hidden="true"><span class="wipe__line"></span></div>
+
+<nav class="nav" aria-label="Primary">
+  <a class="nav__mark" href="index.html">
+    <span class="nav__mark-rule" aria-hidden="true"></span>MERIDIAN
+  </a>
+
+  <div class="nav__links">
+   <a class="nav__link" href="services.html" data-page="services">Services</a>
+    <a class="nav__link" href="experience.html" data-page="experience">Experience</a>
+    <a class="nav__link" href="contact.html" data-page="contact">Contact</a>
+    <span class="nav__dot" aria-hidden="true"></span>
+  </div>
+
+  <button class="nav__burger" type="button" aria-expanded="false" aria-controls="nav-sheet" aria-label="Open menu">
+    <span class="nav__burger-bars" aria-hidden="true"></span>
+  </button>
+</nav>
+
+<div class="nav-sheet" id="nav-sheet" aria-hidden="true">
+  <a class="nav-sheet__link" style="--i:0" href="index.html" data-page="home">Home</a>
+  <a class="nav-sheet__link" style="--i:1" href="services.html" data-page="services">Services</a>
+  <a class="nav-sheet__link" style="--i:2" href="experience.html" data-page="experience">Experience</a>
+  <a class="nav-sheet__link" style="--i:3" href="contact.html" data-page="contact">Contact</a>
+  <p class="nav-sheet__meta">Rakesh.ghosh@gmail.com</p>
+</div>
+
+<main id="main">
+
+  <header class="scene page-head">
+    <span class="margin-note">[ Experience ]</span>
+    <h1 class="page-head__title">A record, and<br>what it caused.</h1>
+    <p class="page-head__lede lede">
+      Grants fund studies. Studies become papers. Papers move ministries, or they are
+      read by no one. Below, the work is plotted by year and by kind, with the threads
+      that connect one thing to the next drawn between them.
+    </p>
+  </header>
+
+  <!-- The constellation -->
+  <section class="scene chart" aria-labelledby="chart-title">
+    <h2 class="sr-only" id="chart-title">Research constellation</h2>
+
+    <div class="chart__frame panel" data-obstacle="coral">
+      <canvas id="constellation"
+        role="img"
+        aria-label="A star chart plotting every dated entry of the curriculum vitae by year and category, with lines drawn between entries that caused one another. The same information is available as a list in the archive below."></canvas>
+    </div>
+
+    <p class="chart__hint">Hover a star to trace its thread · click to pin · esc to release</p>
+
+    <aside class="plaque panel" aria-hidden="true" aria-live="polite">
+      <div class="plaque__head">
+        <span class="plaque__band"></span>
+        <span class="plaque__year"></span>
+      </div>
+      <h3 class="plaque__title"></h3>
+      <p class="plaque__meta"></p>
+      <p class="plaque__body"></p>
+      <a class="plaque__link" href="#" target="_blank" rel="noopener" hidden>Read the source</a>
+    </aside>
+  </section>
+
+  <!-- The archive: the accessible source of truth -->
+  <section class="scene archive" aria-labelledby="archive-title">
+    <span class="margin-note">[ The archive ]</span>
+    <h2 class="sr-only" id="archive-title">Archive index</h2>
+
+    <!-- Education -->
+    <div class="archive__group">
+      <h3 class="archive__band"><span>Education</span><span class="archive__count">02</span></h3>
+      <ol class="archive__list">
+        <li>
+          <button class="archive__entry" type="button" data-entry="phd" aria-pressed="false">
+            <span class="archive__year">pre-2009</span>
+            <span>
+              <span class="archive__title">PhD, Epidemiology</span>
+              <span class="archive__meta">Institute of Health and Society, Newcastle University, UK</span>
+              <span class="archive__body">Doctoral research in epidemiology. The CV does not date the award; on the chart it is plotted before the 2009 post-doctoral appointment.</span>
+            </span>
+          </button>
+        </li>
+        <li>
+          <button class="archive__entry" type="button" data-entry="ucdavis" aria-pressed="false">
+            <span class="archive__year">2009–2012</span>
+            <span>
+              <span class="archive__title">Post-doctoral Scholar</span>
+              <span class="archive__meta">University of California, Davis, CA</span>
+              <span class="archive__body">Generated eight publications. First author on an article in JAMA Pediatrics that received international media coverage, providing novel evidence that the impact of indoor air pollution goes beyond respiratory health and likely affects early childhood growth. Designed and conducted the analysis of a longitudinal study of air pollution and perinatal and childhood outcomes across two provinces of the Czech Republic, funded by the Health Effects Institute.</span>
+            </span>
+          </button>
+        </li>
+      </ol>
+    </div>
+
+    <!-- Positions -->
+    <div class="archive__group">
+      <h3 class="archive__band"><span>Positions and scientific appointments</span><span class="archive__count">03</span></h3>
+      <ol class="archive__list">
+        <li>
+          <button class="archive__entry" type="button" data-entry="ucsf" aria-pressed="false">
+            <span class="archive__year">2016–present</span>
+            <span>
+              <span class="archive__title">Senior Epidemiologist</span>
+              <span class="archive__meta">University of California, San Francisco, CA</span>
+              <span class="archive__body">Leads epidemiological and statistical analyses for research and intervention studies across South Asian and Sub-Saharan African countries. Studies the effects of climate change on maternal and neonatal health, and the impact of interventions implementing evidence-based practice. Designs new studies and grants, executes analysis to generate high-impact publications, and advises research group members on statistical analysis.</span>
+            </span>
+          </button>
+        </li>
+        <li>
+          <button class="archive__entry" type="button" data-entry="nasem-committee" aria-pressed="false">
+            <span class="archive__year">2021–2023</span>
+            <span>
+              <span class="archive__title">National Academies of Sciences, Engineering and Medicine</span>
+              <span class="archive__meta">Scientific Review Committee member</span>
+              <span class="archive__body">Reviewed the EPA's draft Formaldehyde report as a member of the scientific review committee.</span>
+            </span>
+          </button>
+        </li>
+        <li>
+          <button class="archive__entry" type="button" data-entry="ala" aria-pressed="false">
+            <span class="archive__year">undated</span>
+            <span>
+              <span class="archive__title">Research Award Peer-Review Committee</span>
+              <span class="archive__meta">American Lung Association</span>
+              <span class="archive__body">Committee service reviewing research award applications.</span>
+            </span>
+          </button>
+        </li>
+      </ol>
+    </div>
+
+    <!-- Funding -->
+    <div class="archive__group">
+      <h3 class="archive__band"><span>Funding</span><span class="archive__count">04</span></h3>
+      <ol class="archive__list">
+        <li>
+          <button class="archive__entry" type="button" data-entry="gates" aria-pressed="false">
+            <span class="archive__year">2025–2027</span>
+            <span>
+              <span class="archive__title">Gates Foundation, INV-0088837</span>
+              <span class="archive__meta">Ghosh (PI) · $303,000 · Aug 2025 – Jul 2027</span>
+              <span class="archive__body">The effects of non-optimal temperature and air pollution exposure during pregnancy on perinatal and neonatal mortality in South Asia and Sub-Saharan Africa. Investigates how environmental exposures during pregnancy influence adverse outcomes in large, nationally representative samples, quantifying the proportion of perinatal and neonatal mortality attributable to specific environmental exposures. Implements novel machine learning methods to achieve its aims.</span>
+            </span>
+          </button>
+        </li>
+        <li>
+          <button class="archive__entry" type="button" data-entry="jhu" aria-pressed="false">
+            <span class="archive__year">2025</span>
+            <span>
+              <span class="archive__title">Johns Hopkins University, 10434</span>
+              <span class="archive__meta">Ghosh (PI) · $5,000 sub-award · Jan – Jun 2025</span>
+              <span class="archive__body">Vulnerable Newborns Measurement Collaboration, Phase 2. Investigates stillbirth, small-for-gestational age, large-for-gestational age, preterm birth, and their combinations, to identify small and vulnerable newborns. Explores factors associated with the prevalence and mortality risk of these groups, focusing on maternal factors such as age, nutritional status and place of delivery, and infant factors such as sex and multiple gestation, using hospital-based data from Kenya and Uganda.</span>
+            </span>
+          </button>
+        </li>
+        <li>
+          <button class="archive__entry" type="button" data-entry="c3ai" aria-pressed="false">
+            <span class="archive__year">2022–2023</span>
+            <span>
+              <span class="archive__title">C3.ai Enterprise</span>
+              <span class="archive__meta">Ghosh (PI) · $10,000 sub-award · Jul 2022 – Jun 2023</span>
+              <span class="archive__body">COVID-19 and adverse perinatal outcomes. Examined associations between maternal COVID-19 during pregnancy and several adverse perinatal outcomes in a large Mexican cohort. Found that severe COVID-19 was associated with large-for-gestational age infants, and that severe disease may also have increased the risk of other adverse perinatal outcomes. COVID-19 in the first trimester was associated with fetal death, suggesting it could be a high-risk period.</span>
+            </span>
+          </button>
+        </li>
+        <li>
+          <button class="archive__entry" type="button" data-entry="eapbi" aria-pressed="false">
+            <span class="archive__year">2018–2019</span>
+            <span>
+              <span class="archive__title">East Africa Preterm Birth Initiative</span>
+              <span class="archive__meta">Bill and Melinda Gates Foundation · Ghosh (PI) · $25,000 · Apr 2018 – Mar 2019</span>
+              <span class="archive__body">Global burden of environmental PM2.5 exposure on perinatal outcomes. The first study to estimate the global burden of low birth weight and preterm birth attributable to ambient and household PM2.5 pollution.</span>
+            </span>
+          </button>
+        </li>
+      </ol>
+    </div>
+
+    <!-- Awards -->
+    <div class="archive__group">
+      <h3 class="archive__band"><span>Awards and honors</span><span class="archive__count">04</span></h3>
+      <ol class="archive__list">
+        <li>
+          <button class="archive__entry" type="button" data-entry="teaching" aria-pressed="false">
+            <span class="archive__year">2023</span>
+            <span>
+              <span class="archive__title">Excellence in Teaching</span>
+              <span class="archive__meta">Medical students and clinical fellows</span>
+              <span class="archive__body">Honored for excellence in teaching medical students and clinical fellows.</span>
+            </span>
+          </button>
+        </li>
+        <li>
+          <button class="archive__entry" type="button" data-entry="simulation" aria-pressed="false">
+            <span class="archive__year">2019</span>
+            <span>
+              <span class="archive__title">Third place, Research paper</span>
+              <span class="archive__meta">International Meeting on Simulation in HealthCare, San Antonio, TX</span>
+              <span class="archive__body">Third place winner in the research paper competition.</span>
+            </span>
+          </button>
+        </li>
+        <li>
+          <button class="archive__entry" type="button" data-entry="basel" aria-pressed="false">
+            <span class="archive__year">2013</span>
+            <span>
+              <span class="archive__title">Fellowship, Environment and Health Conference</span>
+              <span class="archive__meta">Basel · ISEE, ISES and IAIAQ</span>
+              <span class="archive__body">Fellowship awarded; abstract selected for hot topic presentation.</span>
+            </span>
+          </button>
+        </li>
+        <li>
+          <button class="archive__entry" type="button" data-entry="aaas" aria-pressed="false">
+            <span class="archive__year">2007</span>
+            <span>
+              <span class="archive__title">American Association for the Advancement of Science</span>
+              <span class="archive__meta">Honorary competitive student nomination, Newcastle University</span>
+              <span class="archive__body">Nominated by Newcastle University for honorary competitive student membership.</span>
+            </span>
+          </button>
+        </li>
+      </ol>
+    </div>
+
+    <!-- Publications -->
+    <div class="archive__group">
+      <h3 class="archive__band"><span>Featured publications</span><span class="archive__count">07</span></h3>
+      <ol class="archive__list">
+        <li>
+          <button class="archive__entry" type="button" data-entry="plos2021" aria-pressed="false">
+            <span class="archive__year">2021</span>
+            <span>
+              <span class="archive__title">Ambient and household PM2.5 pollution and adverse perinatal outcomes</span>
+              <span class="archive__meta">PLoS Medicine · Ghosh R, Causey K, Burkart K, Wozniak S, Cohen A, Brauer M</span>
+              <span class="archive__body">A meta-regression and analysis of attributable global burden for 204 countries and territories. In 2019, reducing ambient and household PM2.5 exposure during pregnancy to a minimum risk level could have prevented almost 2.8 million low birth weight and 5.9 million preterm birth infants globally.</span>
+            </span>
+          </button>
+          <a class="archive__link" href="https://pubmed.ncbi.nlm.nih.gov/34547030/" target="_blank" rel="noopener">View in PubMed</a>
+        </li>
+        <li>
+          <button class="archive__entry" type="button" data-entry="nasem2023" aria-pressed="false">
+            <span class="archive__year">2023</span>
+            <span>
+              <span class="archive__title">Review of EPA's 2022 Draft Formaldehyde Assessment</span>
+              <span class="archive__meta">National Academies Press, Washington DC · Ghosh R served as Committee Member</span>
+              <span class="archive__body">Peer-reviewed report of the National Academies of Sciences, Engineering, and Medicine.</span>
+            </span>
+          </button>
+          <a class="archive__link" href="https://doi.org/10.17226/27153" target="_blank" rel="noopener">View the report</a>
+        </li>
+        <li>
+          <button class="archive__entry" type="button" data-entry="bmj2022" aria-pressed="false">
+            <span class="archive__year">2022</span>
+            <span>
+              <span class="archive__title">Stillbirth, neonatal and maternal mortality among caesarean births in Kenya and Uganda</span>
+              <span class="archive__meta">BMJ Open · Ghosh R, Santos N, Butrick E, Wanyoro A, Waiswa P, Kim E, Walker D</span>
+              <span class="archive__body">A register-based prospective cohort study.</span>
+            </span>
+          </button>
+        </li>
+        <li>
+          <button class="archive__entry" type="button" data-entry="lancet2020" aria-pressed="false">
+            <span class="archive__year">2020</span>
+            <span>
+              <span class="archive__title">Effect of a quality improvement package for intrapartum and immediate newborn care on fresh stillbirth and neonatal mortality</span>
+              <span class="archive__meta">The Lancet Global Health · Walker D, Otieno P, Butrick E, Namazzi G, Achola K, Merai R, Otare C, Mubiri P, Ghosh R, Santos N, Miller L, Sloan NL, Waiswa P</span>
+              <span class="archive__body">A cluster-randomised facility-based trial among preterm and low-birthweight babies in Kenya and Uganda.</span>
+            </span>
+          </button>
+        </li>
+        <li>
+          <button class="archive__entry" type="button" data-entry="ehp2015" aria-pressed="false">
+            <span class="archive__year">2015</span>
+            <span>
+              <span class="archive__title">Near-Roadway Air Pollution and Coronary Heart Disease</span>
+              <span class="archive__meta">Environmental Health Perspectives · Ghosh R, Lurmann F, Perez L, Penfold B, Brandt S, Wilson J, Milet M, Künzli N, McConnell R</span>
+              <span class="archive__body">Burden of disease and potential impact of a greenhouse gas reduction strategy in Southern California.</span>
+            </span>
+          </button>
+        </li>
+        <li>
+          <button class="archive__entry" type="button" data-entry="lung2015" aria-pressed="false">
+            <span class="archive__year">2015</span>
+            <span>
+              <span class="archive__title">The Epidemiology of Air Pollution and Childhood Lung Diseases</span>
+              <span class="archive__meta">Book chapter · Ghosh R, Hertz-Picciotto I · In Harding R, Pinkerton KE (eds), The Lung: Development, Aging and the Environment, 2nd edition. Elsevier, London</span>
+              <span class="archive__body">Chapter 24. Peer-reviewed book chapter.</span>
+            </span>
+          </button>
+        </li>
+        <li>
+          <button class="archive__entry" type="button" data-entry="coal2011" aria-pressed="false">
+            <span class="archive__year">2011</span>
+            <span>
+              <span class="archive__title">Indoor coal use and early childhood growth</span>
+              <span class="archive__meta">Archives of Pediatrics &amp; Adolescent Medicine · Ghosh R, Amirian E, Dostal M, Sram RJ, Hertz-Picciotto I</span>
+              <span class="archive__body">Novel evidence that the impact of indoor air pollution extends beyond respiratory health, affecting early childhood growth.</span>
+            </span>
+          </button>
+        </li>
+      </ol>
+    </div>
+
+    <!-- Recognition -->
+    <div class="archive__group">
+      <h3 class="archive__band"><span>Recognition, fellowships and memberships</span><span class="archive__count">03</span></h3>
+      <ol class="archive__list">
+        <li>
+          <button class="archive__entry" type="button" data-entry="media" aria-pressed="false">
+            <span class="archive__year">ongoing</span>
+            <span>
+              <span class="archive__title">International media coverage</span>
+              <span class="archive__meta">NBC News · NPR · Reuters · The Guardian · Forbes · LA Times · CBS News · Der Spiegel</span>
+              <span class="archive__body">Major media organizations across the USA, UK, Canada, Australia, New Zealand, South America and India have covered this research. Television and radio interviews include KTVU Mornings on Fox 2, BBC World Radio, BBC Radio Cambridgeshire, BBC 5 Live Science, ABC Radio National in Australia, W Radio, and Czech Radio.</span>
+            </span>
+          </button>
+        </li>
+        <li>
+          <button class="archive__entry" type="button" data-entry="fph" aria-pressed="false">
+            <span class="archive__year">undated</span>
+            <span>
+              <span class="archive__title">Fellow of the Faculty of Public Health</span>
+              <span class="archive__meta">Royal College of Physicians, UK</span>
+              <span class="archive__body">Fellowship of the Faculty of Public Health.</span>
+            </span>
+          </button>
+          <a class="archive__link" href="http://www.fph.org.uk/faculty_prizes" target="_blank" rel="noopener">Faculty prizes</a>
+        </li>
+        <li>
+          <button class="archive__entry" type="button" data-entry="isee" aria-pressed="false">
+            <span class="archive__year">undated</span>
+            <span>
+              <span class="archive__title">International Society for Environmental Epidemiology</span>
+              <span class="archive__meta">Member</span>
+              <span class="archive__body">Professional membership.</span>
+            </span>
+          </button>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Press -->
+  <section class="scene press" aria-labelledby="press-title">
+    <span class="margin-note">[ Research in focus ]</span>
+    <h2 class="sr-only" id="press-title">Media coverage</h2>
+    <p class="press__lede prose">
+      Research from this practice has been covered by major media organizations in the
+      United States, United Kingdom, Canada, Australia, New Zealand, South America and India.
+    </p>
+
+    <div class="marquee" aria-label="Outlets that have covered this research">
+      <div class="marquee__track">
+        <span class="marquee__item">NBC News</span>
+        <span class="marquee__item">AAAS</span>
+        <span class="marquee__item">NPR</span>
+        <span class="marquee__item">US News</span>
+        <span class="marquee__item">Forbes</span>
+        <span class="marquee__item">Reuters</span>
+        <span class="marquee__item">LA Times</span>
+        <span class="marquee__item">CBS News</span>
+        <span class="marquee__item">The Weather Channel</span>
+        <span class="marquee__item">The Guardian</span>
+        <span class="marquee__item">The Daily Mail</span>
+        <span class="marquee__item">Der Spiegel</span>
+        <span class="marquee__item">Science Daily</span>
+        <span class="marquee__item">NDTV</span>
+        <span class="marquee__item">Times of India</span>
+        <span class="marquee__item">Medical News Today</span>
+        <span class="marquee__item">BBC World Radio</span>
+        <span class="marquee__item">ABC Radio National</span>
+        <span class="marquee__item">Czech Radio</span>
+        <span class="marquee__item">KTVU Fox 2</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene handoff">
+    <a class="handoff__link" href="contact.html">
+      Start a conversation
+      <span class="handoff__arrow" aria-hidden="true">⟶</span>
+    </a>
+    <hr class="rule handoff__rule">
+  </section>
+
+  <footer class="site-foot">
+    <span>Meridian — Est. Research Practice</span>
+    <a href="mailto:Rakesh.ghosh@gmail.com">Rakesh.ghosh@gmail.com</a>
+  </footer>
+
+</main>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

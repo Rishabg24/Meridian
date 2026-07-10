@@ -1,0 +1,121 @@
+/* ==========================================================================
+   MERIDIAN — The meridian wipe + custom cursor
+
+   A single cobalt hairline traverses the viewport once. Outgoing content is
+   clipped to the right of the line; incoming content is clipped to its left.
+   The fluid canvas is never covered, so the background stays continuous.
+   ========================================================================== */
+
+.wipe{
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-wipe);
+  pointer-events: none;
+  opacity: 0;
+}
+.wipe.is-active{ opacity: 1; }
+
+/* The meridian itself. `--wipe-x` is driven from JS, 0 → 100. */
+.wipe__line{
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0;
+  width: 1px;
+  background: var(--cobalt);
+  transform: translate3d(calc(var(--wipe-x, 0) * 1vw), 0, 0);
+  will-change: transform;
+}
+/* A soft leading glow so the line reads as an edge, not a border. */
+.wipe__line::after{
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; left: 0;
+  width: 12rem;
+  transform: translateX(-100%);
+  background: linear-gradient(to left, var(--cobalt-12), transparent);
+}
+
+/* Outgoing page: remains in document flow. 
+   overflow: hidden on body prevents scrolling during transition. */
+main.is-leaving{
+  clip-path: inset(0 0 0 calc(var(--wipe-x, 0) * 1vw));
+  will-change: clip-path;
+}
+
+/* Incoming page: fixed over the viewport so we don't have to scroll to Y=0 
+   while the outgoing page is still visible, which would break its ScrollTriggers. */
+main.is-entering{
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-content);
+  overflow: hidden;
+  clip-path: inset(0 calc(100vw - var(--wipe-x, 0) * 1vw) 0 0);
+  will-change: clip-path;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .wipe{ display: none; }
+  main.is-leaving,
+  main.is-entering{ clip-path: none; will-change: auto; }
+}
+
+/* ---- custom cursor ------------------------------------------------------
+   Fine pointers only. The ring stretches along its velocity vector, which is
+   the same vector fed into the fluid engine. */
+
+.cursor{
+  position: fixed;
+  top: 0; left: 0;
+  z-index: var(--z-cursor);
+  pointer-events: none;
+  display: none;
+  mix-blend-mode: difference;
+}
+
+/* The ring keeps a fixed 56px box and is scaled. Nothing here touches layout;
+   `--ring-stretch` is the velocity-driven deformation written from JS. */
+.cursor__ring{
+  position: absolute;
+  top: 0; left: 0;
+  width: 56px; height: 56px;
+  margin: -28px 0 0 -28px;
+  border: 1px solid #ffffff;
+  border-radius: 50%;
+  background-color: transparent;
+  transform: rotate(var(--ring-angle, 0rad))
+             scale(calc(var(--ring, .535) * var(--ring-stretch, 1)),
+                   calc(var(--ring, .535) / var(--ring-stretch, 1)));
+  transition: transform var(--dur-fast) var(--ease-out-quart),
+              background-color var(--dur-fast) ease;
+}
+
+.cursor__dot{
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 3px;
+  margin: -1.5px 0 0 -1.5px;
+  border-radius: 50%;
+  background: #ffffff;
+  transition: opacity var(--dur-fast) ease;
+}
+
+/* Over an interactive element the ring opens up and the dot recedes. */
+.cursor.is-hot{ --ring: 1; }
+.cursor.is-hot .cursor__ring{ background-color: rgba(255,255,255,.10); }
+.cursor.is-hot .cursor__dot{ opacity: 0; }
+
+.cursor.is-pressed{ --ring: .39; }
+
+@media (pointer: fine){
+  .cursor{ display: block; }
+  body.has-custom-cursor,
+  body.has-custom-cursor a,
+  body.has-custom-cursor button{ cursor: none; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .cursor{ display: none; }
+  body.has-custom-cursor,
+  body.has-custom-cursor a,
+  body.has-custom-cursor button{ cursor: auto; }
+}

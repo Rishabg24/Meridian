@@ -1,0 +1,247 @@
+/* ==========================================================================
+   MERIDIAN — Experience
+   A research constellation above; the archive index below.
+   Canvas for delight, DOM for truth. Both drive the same state.
+   ========================================================================== */
+
+.chart{
+  position: relative;
+  padding-block: var(--gap-l);
+}
+
+.chart__frame{
+  position: relative;
+  height: clamp(380px, 58vh, 560px);
+  padding: clamp(.75rem, 1.5vw, 1.25rem);
+}
+
+#constellation{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.chart__hint{
+  margin-top: var(--gap-xs);
+  font-size: var(--t-micro);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--obsidian-62);
+}
+
+/* ---- the plaque -------------------------------------------------------- */
+
+.plaque{
+  position: absolute;
+  right: clamp(1rem, 3vw, 2.5rem);
+  bottom: clamp(1rem, 3vw, 2.5rem);
+  width: min(30rem, calc(100% - 2 * var(--edge)));
+  padding: clamp(1.4rem, 2.2vw, 2rem);
+  opacity: 0;
+  transform: translateY(.75rem);
+  transition: opacity var(--dur-mid) var(--ease-out-quart),
+              transform var(--dur-slow) var(--ease-out-expo);
+  pointer-events: none;
+}
+.plaque.is-shown{ opacity: 1; transform: none; }
+
+.plaque__head{
+  display: flex;
+  justify-content: space-between;
+  gap: var(--gap-s);
+  font-size: var(--t-micro);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.plaque__band{ color: var(--cobalt); }
+.plaque__year{ color: var(--obsidian-62); font-variant-numeric: tabular-nums; }
+
+.plaque__title{
+  margin-top: var(--gap-xs);
+  font-size: var(--t-h4);
+  line-height: 1.35;
+}
+
+.plaque__meta{
+  margin-top: .5rem;
+  font-size: var(--t-micro);
+  line-height: 1.6;
+  color: var(--obsidian-62);
+}
+
+.plaque__body{
+  margin-top: var(--gap-xs);
+  padding-top: var(--gap-xs);
+  border-top: 1px solid var(--obsidian-08);
+  font-size: var(--t-small);
+  line-height: 1.65;
+  color: var(--obsidian-70);
+}
+
+.plaque__link{
+  display: inline-block;
+  margin-top: var(--gap-xs);
+  font-size: var(--t-micro);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--cobalt);
+  border-bottom: 1px solid var(--cobalt);
+  pointer-events: auto;
+}
+
+@media (max-width: 900px){
+  .plaque{
+    position: static;
+    width: 100%;
+    margin-top: var(--gap-s);
+    opacity: 1;
+    transform: none;
+  }
+  .plaque:not(.is-shown){ display: none; }
+}
+
+/* ---- the archive ------------------------------------------------------- */
+
+.archive{
+  padding-block: var(--gap-l) var(--gap-xl);
+  border-top: 1px solid var(--obsidian-08);
+}
+
+.archive__group{ margin-top: var(--gap-l); }
+.archive__group:first-of-type{ margin-top: var(--gap-m); }
+
+.archive__band{
+  display: flex;
+  align-items: baseline;
+  gap: var(--gap-s);
+  font-size: var(--t-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--obsidian-62);
+  padding-bottom: var(--gap-xs);
+  border-bottom: 1px solid var(--obsidian-12);
+}
+.archive__count{ font-variant-numeric: tabular-nums; }
+
+.archive__list{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.archive__list li{ border-bottom: 1px solid var(--obsidian-08); }
+
+/* The entry is a real button: reachable, pressable, and it lights its star. */
+.archive__entry{
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: var(--gap-s);
+  width: 100%;
+  padding: var(--gap-s) 0;
+  text-align: left;
+  cursor: pointer;
+  transition: opacity var(--dur-fast) ease, background-color var(--dur-fast) ease;
+}
+.archive__entry:hover{ background: var(--obsidian-04); }
+.archive__entry.is-dim{ opacity: .38; }
+.archive__entry.is-lit{ background: var(--coral-12); }
+.archive__entry.is-active{ background: var(--cobalt-12); }
+
+/* The entry's fields are spans (a button may not contain headings or <p>), so
+   they need explicit block flow. */
+.archive__year,
+.archive__title,
+.archive__meta,
+.archive__body{ display: block; }
+
+.archive__year{
+  font-size: var(--t-micro);
+  letter-spacing: .1em;
+  color: var(--obsidian-62);
+  font-variant-numeric: tabular-nums;
+  padding-top: .28rem;
+}
+.archive__entry.is-active .archive__year{ color: var(--cobalt); }
+
+.archive__title{
+  font-family: var(--serif);
+  font-size: var(--t-h4);
+  font-weight: 500;
+  line-height: 1.35;
+  max-width: 52ch;
+}
+
+.archive__meta{
+  margin-top: .45rem;
+  font-size: var(--t-micro);
+  line-height: 1.65;
+  color: var(--obsidian-62);
+  max-width: 68ch;
+}
+
+.archive__body{
+  margin-top: .6rem;
+  font-size: var(--t-small);
+  line-height: 1.7;
+  color: var(--obsidian-70);
+  max-width: 72ch;
+}
+
+.archive__link{
+  display: inline-block;
+  margin: .5rem 0 var(--gap-s) 7.75rem;
+  font-size: var(--t-micro);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--cobalt);
+  border-bottom: 1px solid var(--obsidian-18);
+}
+.archive__link:hover{ border-color: var(--cobalt); }
+
+@media (max-width: 700px){
+  .archive__entry{ grid-template-columns: 1fr; gap: .35rem; }
+  .archive__link{ margin-left: 0; }
+}
+
+/* ---- the media marquee ------------------------------------------------- */
+
+.press{
+  padding-block: var(--gap-l);
+  border-top: 1px solid var(--obsidian-08);
+}
+
+.press__lede{
+  max-width: 58ch;
+  margin-top: var(--gap-xs);
+}
+
+.marquee{
+  display: flex;
+  gap: 0;
+  margin-top: var(--gap-m);
+  overflow: hidden;
+  /* Fade the ends so the loop has no visible seam. */
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee__track{
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--gap-m);
+  padding-right: var(--gap-m);
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.marquee__item{
+  font-size: var(--t-small);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--obsidian-62);
+}
+.marquee__item::after{
+  content: "·";
+  margin-left: var(--gap-m);
+  color: var(--obsidian-18);
+}
