@@ -1,0 +1,11 @@
+# Meridian — public health research practice
+# https://meridianresearchservices.org
+
+# Everything is public. Crawlers need the CSS and JS as much as the HTML:
+# Google renders the page before it indexes it, and the archive, the
+# constellation and the service canvases are all script-driven. Blocking
+# css/ or js/ would make the rendered page look broken to the indexer.
+User-agent: *
+Allow: /
+
+Sitemap: https://meridianresearchservices.org/sitemap.xml

@@ -18,3 +18,19 @@ tests/
 !**/*.html
 !**/*.css
 !.gitignore
+
+# Search-engine and deployment files. These must ship: the deny-all above
+# would otherwise leave robots.txt and the sitemap untracked and undeployed,
+# which is indistinguishable from never having written them.
+!robots.txt
+!sitemap.xml
+!CNAME
+
+# Brand imagery referenced by <link rel="icon"> and og:image. Named
+# individually so the blanket *.png rule keeps ignoring screenshots.
+!assets/
+!assets/favicon.svg
+!assets/icon-192.png
+!assets/icon-512.png
+!assets/apple-touch-icon.png
+!assets/og-cover.png

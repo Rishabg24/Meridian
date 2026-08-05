@@ -203,10 +203,45 @@ export function initTransitions({ onMount, fluid }) {
     });
   }
 
-  /** Keep the description in sync so a shared URL previews correctly. */
+  /**
+   * Keep the head's page-level metadata in sync with the route.
+   *
+   * Only <main> is swapped, so without this the description, canonical URL and
+   * structured data would still describe the page the reader arrived on. A
+   * crawler fetches each URL cold and never sees the stale state, but a reader
+   * sharing the current address does — and so do the scrapers that follow.
+   *
+   * Every tag is edited in place, never added or removed: if a document does
+   * not carry one, it is left alone rather than invented.
+   */
+  const SYNCED_META = [
+    'meta[name="description"]',
+    'meta[name="robots"]',
+    'meta[property="og:type"]',
+    'meta[property="og:url"]',
+    'meta[property="og:title"]',
+    'meta[property="og:description"]',
+    'meta[name="twitter:title"]',
+    'meta[name="twitter:description"]',
+  ];
+
   function syncMeta(doc) {
-    const next = doc.querySelector('meta[name="description"]');
-    const current = document.querySelector('meta[name="description"]');
-    if (next && current) current.setAttribute("content", next.getAttribute("content") || "");
+    for (const selector of SYNCED_META) {
+      const next = doc.querySelector(selector);
+      const current = document.querySelector(selector);
+      if (next && current) current.setAttribute("content", next.getAttribute("content") || "");
+    }
+
+    const nextCanonical = doc.querySelector('link[rel="canonical"]');
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (nextCanonical && canonical) {
+      canonical.setAttribute("href", nextCanonical.getAttribute("href") || "");
+    }
+
+    // The JSON-LD graph describes this page, not the site, so it is replaced
+    // wholesale. Nothing executes it; consumers read it back off the DOM.
+    const nextLd = doc.querySelector('script[type="application/ld+json"]');
+    const currentLd = document.querySelector('script[type="application/ld+json"]');
+    if (nextLd && currentLd) currentLd.textContent = nextLd.textContent;
   }
 }
