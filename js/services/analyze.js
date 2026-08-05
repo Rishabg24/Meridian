@@ -20,7 +20,7 @@ const Y_DOMAIN = [0, 0.4];
 const BETA0 = 0.012;
 const BETA1 = 0.00205;
 
-const EQUATION = "log(RR) = β₀ + β₁·PM₂.₅ + ε";
+const EQUATION = "ŷ = β₀ + β₁·x₁ + β₂·x₂ + ε";
 
 export function create(canvas) {
   const rand = seeded(884401);
