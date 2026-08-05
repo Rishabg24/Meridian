@@ -1,0 +1,20 @@
+# Ignore local environment and editor metadata
+venv/
+
+# Ignore project artifacts and unwanted files
+*.md
+*.png
+.claude/
+tests/
+
+# Keep only web source files in version control
+# Allow directories so recursive rules can unignore nested source files.
+*
+!*/
+!*.js
+!*.html
+!*.css
+!**/*.js
+!**/*.html
+!**/*.css
+!.gitignore

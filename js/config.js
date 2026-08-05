@@ -23,9 +23,9 @@ export const CONTACT = {
   destination: "Rakesh.ghosh@gmail.com",
 
   emailjs: {
-    publicKey: "REPLACE_WITH_EMAILJS_PUBLIC_KEY",
-    serviceId: "REPLACE_WITH_EMAILJS_SERVICE_ID",
-    templateId: "REPLACE_WITH_EMAILJS_TEMPLATE_ID",
+    publicKey: "AJjV3SCpwTY5F8tOY",
+    serviceId: "service_i6dragj",
+    templateId: "template_x6gfglg",
   },
 };
 
